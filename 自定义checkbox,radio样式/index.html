@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义checkbox， radio样式</title>
+	<style>
+		.hide input{
+				/*visibility: hidden;*/
+				display: none;
+		}
+		.hide label::before{
+			content:'';
+			background-image: url('./bc.png');
+			display: inline-block;
+			width: 50px;
+			height: 20px;
+		}
+		/*伪元素*/
+		.checkbox label::before{
+			background-position: -6px 23px;	
+		}
+		.radio label::before{
+			background-position: -6px 44px;
+		}
+		/*伪类*/
+		input[type="checkbox"]:checked+label::before{
+			background-position: -41px 23px;	
+			
+		}
+		input[type="radio"]:checked+label::before{
+			background-position: -41px 44px;	
+
+		}
+	</style>
+</head>
+<body>
+	<div class="checkbox hide"><input type="checkbox" id="ch1" name="sport">
+		<label for="ch1">篮球</label><input type="checkbox" id="ch2" name="sport">
+		<label for="ch2">足球</label><input type="checkbox" id="ch3" name="sport">
+		<label for="ch3">棒球</label>
+	</div>
+	<div class="radio hide"><input type="radio" id="ra1" name="sub">
+		<label for="ra1">英语</label><input type="radio" id="ra2" name="sub">
+		<label for="ra2">日语</label><input type="radio" id="ra3" name="sub">
+		<label for="ra3">棒球</label>
+	</div>
+</body>
+</html>
