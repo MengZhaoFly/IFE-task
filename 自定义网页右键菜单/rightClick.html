@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>鼠标右键</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	.container{
+		width: 500px;
+		height: 300px;
+		margin: 20px 30px;
+		background-color: #f5f5f5;
+		border-radius: 0 0 5px;
+		position: relative;
+	}
+	p{
+		font-size: 30px;
+		color: #888;
+		text-align: center;
+	}
+	#context{
+		width: 100px;
+		height: 120px;
+		position: absolute;
+		border-radius: 0 0 5px;
+		border: 1px solid #888;
+		display: none;
+	}
+	#context ul li{
+		font-size: 20px;
+		text-align: center;
+		list-style: none;
+	}
+	#context ul li+li{
+		border-top: 1px solid #888;
+
+	}
+	</style>
+</head>
+<body>
+	<div class="container" id="div1">
+		<p>右键单击鼠标试一试</p>
+		<p>右键单击鼠标试一试</p>
+		<p>右键单击鼠标试一试</p>
+	</div>
+	<div id="context">
+		<ul>
+			<li>刷新</li>
+			<li>新建</li>
+			<li>取消</li>
+			<li>个性化</li>
+		</ul>
+	</div>
+	<script>
+	/*获取元素样式 非行间样式 即最终表现样式*/
+		function getStyle(obj, attr) {
+			return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj, false)[attr];
+		}
+		
+		var oDiv=document.getElementById("div1");
+		var oContext=document.getElementById("context");
+		oContext.oncontextmenu=function(){
+			return false;
+		}
+		oDiv.oncontextmenu=function(e){
+			var e=e || window.event;
+			var poX=e.clientX,
+			  	poY=e.clientY;
+			var oDivMLeft=parseInt(getStyle(oDiv,'marginLeft')),
+				oDivMTop=parseInt(getStyle(oDiv,'marginTop')),
+				oDivWidth=parseInt(getStyle(oDiv,'width')),
+				oDivHeight=parseInt(getStyle(oDiv,'height'));
+			var oContextWidth=parseInt(getStyle(oContext,'width')),
+				oContextHeight=parseInt(getStyle(oContext,'height'));
+			// 显示 并定位
+			oContext.style.display='block';
+			oContext.style.left=poX+'px';
+			oContext.style.top=poY+'px';
+			console.log(poX+''+poY);
+			// x轴位置能否容纳
+			if (poX>(oDivMLeft+oDivWidth-oContextWidth)) {
+				oContext.style.left=poX-oContextWidth+'px';
+
+			}
+			//Y轴位置能否容纳
+			if(poY>(oDivMTop+oDivHeight-oContextHeight)){
+				oContext.style.top=poY-oContextHeight+'px';
+			}
+		
+			return false;
+		};
+		oDiv.onmouseout=function(){
+			document.onclick=function(){
+			oContext.style.display='none';
+
+			}
+		}
+
+	</script>
+	
+</body>
+</html>
