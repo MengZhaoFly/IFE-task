@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /*外层圆*/
+        
+        .out {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #FF298C;
+            border-radius: 50%;
+            border-right-color: transparent;
+            transform-origin: center center;
+        }
+        
+        .out.animation {
+            animation: rotate 1s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+        /*内层*/
+        
+        .inner {
+            width: 0px;
+            height: 0px;
+            border-style: solid;
+            border-radius: 100%;
+            border-left-color: #FF53A3;
+            border-bottom-color: #FF53A3;
+            border-top-color: #FBA2CA;
+            border-right-color: #FBA2CA;
+            border-width: 40px;
+            transform-origin: center center;
+            transform: rotate(45deg);
+            /*定位于 out的内部*/
+            position: absolute;
+        }
+        /*左右两个半圆 与底层圆颜色各异 且覆盖于上面*/
+        
+        .left {
+            width: 0px;
+            height: 0px;
+            border-style: solid;
+            border-radius: 100%;
+            border-top-color: #FF53A3;
+            border-right-color: #FF53A3;
+            border-left-color: transparent;
+            border-bottom-color: transparent;
+            border-width: 40px;
+            position: absolute;
+            left: -40px;
+            top: -40px;
+            animation: aniLeft 1s linear infinite ;
+            /*transform: rotate(0deg);*/
+            /*z-index: 1;*/
+        }
+        
+       @keyframes aniLeft {
+            0% {
+                transform: rotate(0deg);
+            }
+            33% {
+                transform: rotate(-180deg);
+            }
+            66% {
+                transform: rotate(-180deg);
+               
+            }
+            /*66.01%{
+                transform: rotate(-180deg);
+                
+            }*/
+            100% {
+                transform: rotate(-360deg);
+                z-index: 1;
+            }
+            
+            
+        }
+        
+        .right {
+            width: 0px;
+            height: 0px;
+            border-style: solid;
+            border-radius: 100%;
+            border-left-color: #FBA2CA;
+            border-bottom-color: #FBA2CA;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-width: 40px;
+            position: absolute;
+            left: -40px;
+            top: -40px;
+            transform: rotate(0deg);
+            animation: aniright 1s linear infinite ;
+            /*animation-delay:1s; */
+        }
+        
+        @keyframes aniright {
+            0% {
+                transform: rotate(0deg);
+            }
+            33% {
+                transform: rotate(0deg);
+            }
+            66% {
+                transform: rotate(-180deg);
+                
+            }
+            /*66.01%{
+                transform: rotate(-180deg);
+                
+            }*/
+            100% {
+                transform: rotate(-180deg);
+               
+            }
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="out animation">
+
+        </div>
+        <div class="inner">
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
